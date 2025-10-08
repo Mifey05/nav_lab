@@ -9,10 +9,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Navigation Lab',
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
-        '/home': (context) => HomeScreen(),
+        '/': (context) => HomeScreen(),
         '/details': (context) => DetailsScreen(),
+        '/login': (context) => LoginScreen(),
       },
     );
   }
@@ -56,6 +57,25 @@ class DetailsScreen extends StatelessWidget {
               child: Text('Back to Home')
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Login Screen')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/');
+          },
+          child: Text('Login and Go Home'),
         ),
       ),
     );
