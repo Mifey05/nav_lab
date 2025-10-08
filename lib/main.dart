@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomeScreen(),
         '/details': (context) => DetailsScreen(),
         '/login': (context) => LoginScreen(),
+        '/profile': (context) => ProfileScreen(),
       },
     );
   }
@@ -27,11 +28,21 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Home Screen')),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/details', arguments: 'Data from Homescreen');
-          },
-          child: Text('Open Details'),
+        child: Column(
+          children: [
+            ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/details', arguments: 'Data from Homescreen');
+            },
+            child: Text('Open Details'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile', arguments: 'kasmir');
+              },
+              child: Text('Go to Profile'),
+            ),
+          ]
         ),
       ),
     );
@@ -77,6 +88,36 @@ class LoginScreen extends StatelessWidget {
           },
           child: Text('Login and Go Home'),
         ),
+      ),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as String?;
+    String letext ='';
+    if (args == null || args.isEmpty) {
+      var letext = 'Data not received';
+    } else if (args == 'kasmir') {
+      var letext = 'Wow, benar banget! kasmir memang tampan sekali';
+    } else {
+      var letext = 'lah lu siapa';
+    }
+    return Scaffold(
+      appBar: AppBar(title: Text('Profile Screen')),
+      body: Center(
+        child: Column(
+          children: [
+            Text(letext),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context), child: Text('Back to home')
+              )
+          ],
+        )
       ),
     );
   }
