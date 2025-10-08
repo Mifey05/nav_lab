@@ -9,46 +9,47 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Navigation Lab',
-      home: FirstScreen(),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => HomeScreen(),
+        '/details': (context) => DetailsScreen(),
+      },
     );
   }
 }
 
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('First Screen')),
+      appBar: AppBar(title: Text('Home Screen')),
       body: Center(
         child: ElevatedButton(
-          child: Text('Go to Second Screen'),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondScreen()),
-            );
+            Navigator.pushNamed(context, '/details');
           },
+          child: Text('Open Details'),
         ),
       ),
     );
   }
 }
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Second Screen')),
+      appBar: AppBar(title: Text('Details Screen')),
       body: Center(
         child: ElevatedButton(
-          child: Text('Go Back'),
           onPressed: () {
             Navigator.pop(context);
           },
+          child: Text('Back to Home'),
         ),
       ),
     );
